@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import MobileView from './components/MobileView'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { setBannerData, setBaseURL } from './store/movieNextSlice'
+import { setBannerData, setBaseURL, setTrendingData } from './store/movieNextSlice'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -30,7 +30,7 @@ const App = () => {
        const response = await axios.get(`/configuration`)
        dispatch(setBaseURL(`${response.data.images.base_url}original`))       
     } catch (error) {
-      
+      console.log(error)
     }
   }
 

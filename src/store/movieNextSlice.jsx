@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     bannerData :[],
     baseURL : '',
-    nowPlaying: []
 }
 
 export const movieNextSlice = createSlice(
@@ -16,14 +15,11 @@ export const movieNextSlice = createSlice(
             },
             setBaseURL : (state, action)=>{
                 state.baseURL = action.payload
-            },
-            setNowPlaying:(state, action)=>{
-                state.nowPlaying = action.payload
             }
         }
     }
 )
 
-export const {setBannerData, setBaseURL, setNowPlaying} = movieNextSlice.actions
+export const {setBannerData, setBaseURL} = movieNextSlice.actions
 
 export const movieNextReducer = movieNextSlice.reducer
