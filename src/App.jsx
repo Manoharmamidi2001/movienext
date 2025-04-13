@@ -14,6 +14,7 @@ const App = () => {
     try {
       const response = await axios.get(`/trending/all/week`)
       dispatch(setBannerData(response.data.results))
+      console.log(response.data.results)
     } catch (error) {
       return error
     }
@@ -34,14 +35,14 @@ const App = () => {
   }
 
   return (
-    <div>
+    <main className='pb-14 ld:pb-0'>
       <Header/>
-        <div className='pt-0'>
+        <div>
         <Outlet/>
         </div>
       <Footer/>
       <MobileView/>
-    </div>
+    </main>
   )
 }
 
