@@ -35,11 +35,9 @@ const Header = () => {
                 <nav className='hidden lg:flex gap-5'>
                     {navigation.map((nav, index)=>{
                         return(
-                            <>
-                                <NavLink key={nav.label} to={nav.href} className={({isActive})=>`px-2 hover:text-neutral-50 ${isActive && "text-neutral-50"} active:scale-50 transition-all`}>
-                                    {nav.label}
-                                </NavLink>
-                            </>
+                            <NavLink key={nav.label} to={nav.href} className={({isActive})=>`px-2 hover:text-neutral-50 ${isActive && "text-neutral-50"} active:scale-50 transition-all`}>
+                                {nav.label}
+                            </NavLink>
                         )
                     })}
                 </nav>
@@ -47,7 +45,7 @@ const Header = () => {
                     <form className='flex items-center' onSubmit={handleSubmit}>
                         <input type="text" placeholder='Search here...' className='bg-transparent px-4 py-1 outline-none border-none hidden lg:block' value={input} onChange={handleChange}/>
                         <div className='flex '>
-                        <button className='text-2xl text-neutral-300 active:scale-50 transition-all'>
+                        <button className='text-2xl text-neutral-300 active:scale-50 transition-all hidden lg:block'>
                             <IoSearchSharp />
                         </button>
                         </div>

@@ -2,25 +2,40 @@ import React, { useRef } from 'react';
 import Card from './Card';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-const HorizontalScrollCards = ({ data, heading }) => {
+const HorizontalScrollCards = ({ data, heading, trending }) => {
   const scrollRef = useRef(null);
 
   const handlePrevious = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+      if (scrollRef.current.scrollLeft === 0) {
+        // Scroll to end
+        scrollRef.current.scrollTo({
+          left: scrollRef.current.scrollWidth,
+          behavior: 'smooth'
+        });
+      } else {
+        scrollRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+      }
     }
   };
 
   const handleNext = () => {
     if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
+      const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10; // buffer
+
+      if (isAtEnd) {
+        // Scroll to start
+        scrollRef.current.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        scrollRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+      }
     }
   };
-
   return (
-    <div className='relative'>
-      <div className='container my-10 px-16'>
-        <h2 className='text-xl lg:text-2xl font-bold mb-2'>{heading || 'Trending Shows'}</h2>
+    <div className='relative overflow-x-hidden'>
+    <div className='container my-4 px-4 sm:px-8 md:px-12 lg:px-16 overflow-x-hidden'>
+    <h2 className='text-xl lg:text-2xl font-bold mb-2'>{heading || 'Trending Shows'}</h2>
         <div className='relative'>
           {/* Arrows */}
           <button
@@ -39,14 +54,14 @@ const HorizontalScrollCards = ({ data, heading }) => {
           {/* Scrollable Container */}
           <div
             ref={scrollRef}
-            className='grid grid-cols-[repeat(auto-fit,250px)] gap-8 grid-flow-col overflow-x-scroll scrollbar-hide'
+            className='flex gap-6 overflow-x-auto scroll-smooth pb-2 hide-scrollbar'
           >
             {data.map((item, index) => (
               <Card
                 data={item}
                 index={index + 1}
                 key={`${item.id}${heading}${index}`}
-                trending={true}
+                trending={trending}
               />
             ))}
           </div>

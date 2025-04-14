@@ -7,32 +7,26 @@ const BannerHome = () => {
     const imageURL = useSelector(state => state.movieData.baseURL)  
     const [image, setImage] = useState(0)
 
-    const handleNext=()=>{
-        if(image < bannerData.length-1){
-            setImage(prev => prev+1)
-        }
-    }
+    const handleNext = () => {
+        setImage(prev => (prev + 1) % bannerData.length);
+    };
+    
+    const handlePrevious = () => {
+        setImage(prev => (prev - 1 + bannerData.length) % bannerData.length);
+    };
+    
 
-    const handlePrevious = ()=>{
-        if(image > 0){
-            setImage(prev => prev-1)
-        }
-    }
-
-    useEffect(()=>{
-        const interval = setInterval(()=>{
-            if(image < bannerData.length-1){
-                handleNext()
-            }else{
-                setImage(0)
-            }
-        },5000)
-
-        return ()=> clearInterval(interval)
-    }, [bannerData, imageURL])
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setImage(prev => (prev + 1) % bannerData.length);
+        }, 5000);
+    
+        return () => clearInterval(interval);
+    }, [bannerData.length]);
+    
     
   return (
-    <section className='w-full h-full'>
+    <section className='w-full h-full overflow-hidden'>
         <div className='flex min-w-full max-h-[95vh]'>
             {bannerData.map((item, index)=>{
                 return(

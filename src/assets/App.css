@@ -5,3 +5,13 @@
 body{
     @apply bg-neutral-900 text-neutral-300
 }
+
+/* Completely hide scrollbar on all browsers */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;             /* Chrome, Safari */
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;     /* Firefox */
+  }
+  

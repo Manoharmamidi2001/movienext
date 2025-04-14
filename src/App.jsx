@@ -35,9 +35,9 @@ const App = () => {
   }
 
   return (
-    <main className='pb-14 ld:pb-0'>
+    <main>
       <Header/>
-        <div>
+        <div className="flex-1">
         <Outlet/>
         </div>
       <Footer/>

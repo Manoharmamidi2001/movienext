@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div>
       <BannerHome/>
-      <HorizontalScrollCards data={trendingData} heading={'Trending'}/>
+      <HorizontalScrollCards data={trendingData} heading={'Trending'} trending={true}/>
       <HorizontalScrollCards data={nowPlayingData} heading={'Now Playing'}/>
       <HorizontalScrollCards data={popularData} heading={'Popular'}/>
       <HorizontalScrollCards data={topRated} heading={'Top Rated'}/>
