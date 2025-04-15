@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import MobileView from './components/MobileView'
 import axios from 'axios'
 import { useDispatch } from 'react-redux'
-import { setBannerData, setBaseURL, setTrendingData } from './store/movieNextSlice'
+import { setBannerData, setBaseURL } from './store/movieNextSlice'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -37,7 +37,7 @@ const App = () => {
   return (
     <main>
       <Header/>
-        <div className="flex-1">
+        <div className="flex-1 min-h-[100vh]">
         <Outlet/>
         </div>
       <Footer/>

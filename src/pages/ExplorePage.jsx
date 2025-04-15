@@ -53,7 +53,7 @@ const ExplorePage = () => {
   return (
     <>
     <div className='flex flex-col pt-16'>
-      <h1 >Popular {params.explore} shows</h1>
+      <h1 className='text-3xl p-3 font-bold'>Popular {params.explore} shows</h1>
       <div className="flex flex-wrap justify-center gap-10">
         {data.map((item, index) => (
           <Card key={index} data={item} index={index} media_type={params.explore} className={`hover:scale-105 hover:shadow-2xl hover:brightness-110 transition-all`}/>
