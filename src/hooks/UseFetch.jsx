@@ -5,7 +5,7 @@ const UseFetch = (endpoint) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const fetchData = async () => {
+  const UseFetch = async () => {
     try {
       setLoading(true)
       const response = await axios.get(endpoint)
@@ -26,7 +26,7 @@ const UseFetch = (endpoint) => {
   }
 
   useEffect(() => {
-    fetchData()
+    UseFetch()
     // Add endpoint to dependency array
   }, [endpoint])
 
