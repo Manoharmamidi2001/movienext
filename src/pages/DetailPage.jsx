@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import UseFetchDetails from '../hooks/UseFetchDetails'
 import Divider from '../components/Divider'
 import UseFetch from '../hooks/UseFetch'
 import HorizontalScrollCards from '../components/HorizontalScrollCard'
+import VideoPlay from '../components/VideoPlay'
+import avatar from '../assets/avatar.png'
 
 const DetailPage = () => {
+  const [playVideo, setPlayVideo] = useState(false)
+  const [playVideoId, setPlayVideoId] = useState('')
   const { explore, id } = useParams()
   const imageURL = useSelector(state => state.movieData.baseURL)
 
-  const detailsEndpoint = explore && id ? `/${explore}/${id}` : null
-  const creditsEndpoint = explore && id ? `/${explore}/${id}/credits` : null
-  const similarEndPoint = explore && id ? `/${explore}/${id}/similar` : null
-  const recommendationsEndPoint = explore && id ? `/${explore}/${id}/recommendations` : null
+  useEffect(()=>{
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  },[id])
+
+  const detailsEndpoint =`/${explore}/${id}`
+  const creditsEndpoint =`/${explore}/${id}/credits`
+  const similarEndPoint =`/${explore}/${id}/similar`
+  const recommendationsEndPoint =`/${explore}/${id}/recommendations`
 
 
   const { data } = UseFetchDetails(detailsEndpoint)
@@ -31,6 +39,13 @@ const DetailPage = () => {
     return `${hours}h ${minutes}m`
   }
 
+  const handlePlayVideo = (data)=>{
+    setPlayVideoId(data.id)
+    setPlayVideo(true)
+  }
+
+  
+
  console.log
  (castData);
   return (
@@ -46,8 +61,8 @@ const DetailPage = () => {
       </div>
 
       {/* Content Section */}
-      <div className="container mx-auto px-4 -mt-40 relative z-10">
-        <div className="flex flex-col md:flex-row gap-6 items-center md:items-start">
+      <div className="container mx-auto px-3 -mt-40 relative z-10 flex flex-col items-center ">
+      <div className="flex flex-col md:flex-row gap-12 items-center md:items-start">
           {/* Poster */}
           <div className="w-48 md:w-60  lg:-mt-32">
             <img
@@ -55,7 +70,7 @@ const DetailPage = () => {
               alt={data.title || data.name}
               className="h-72 md:h-80 w-full object-cover rounded shadow-lg"
             />
-            <button className="group mt-3 w-full py-4 text-center bg-gradient-to-r from-red-600 via-orange-700 to-red-500 rounded-md text-xl text-white font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:brightness-110 hover:shadow-lg overflow-hidden relative">
+            <button onClick={()=>handlePlayVideo(data)} className="group mt-3 w-full py-4 text-center bg-gradient-to-r from-red-600 via-orange-700 to-red-500 rounded-md text-xl text-white font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:brightness-110 hover:shadow-lg overflow-hidden relative">
               <span className="relative z-10 group-hover:animate-pulse group-hover:tracking-widest transition-all duration-500 ease-in-out">
                 Play Now
               </span>
@@ -68,7 +83,9 @@ const DetailPage = () => {
             <h2 className="text-2xl md:text-4xl font-bold mb-2">{data.title || data.name}</h2>
             {data.tagline && <p className="italic text-gray-400 mb-2">"{data.tagline}"</p>}
             <Divider/>
-            <p className="text-gray-200 leading-relaxed">{data.overview}</p>
+            <p className="text-gray-200 leading-relaxed w-full md:w-[600px] lg:w-[700px]">
+              {data.overview}
+            </p>
             <Divider/>
             <div className='flex gap-1'>
             {data.release_date && (
@@ -106,7 +123,7 @@ const DetailPage = () => {
               {castData.cast.slice(0, 10).map((cast, index) => (
                 <div key={index} className="flex flex-col items-center w-24 text-center">
                   <img
-                    src={`${imageURL}/${cast.profile_path}`}
+                    src={cast.profile_path ? `${imageURL}/${cast.profile_path}` : `${avatar}`}
                     alt={cast.name}
                     className="rounded-full w-20 h-20 object-cover mb-1"
                   />
@@ -126,6 +143,11 @@ const DetailPage = () => {
       <div>
         <HorizontalScrollCards data={recommendData} heading={`Recommended ${explore}s for you`}/>
       </div>
+      {
+        playVideo && (
+          <VideoPlay videoId={playVideoId} close={()=>setPlayVideo(false)} endpoint={detailsEndpoint}/>
+        )
+      }
     </div>
   )
 }

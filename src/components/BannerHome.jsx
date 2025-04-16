@@ -56,9 +56,7 @@ const BannerHome = () => {
                                     <span>|</span>
                                     <p>Views: {`${Number(item.popularity).toFixed(0)}`}</p>
                                 </div>
-                                <button className='bg-red-700 px-4 py-2 text-white font-bold rounded mt-4'>
-                                    Play Now
-                                </button>
+                                
                             </div>
                         </div>
                     </div>
