@@ -5,7 +5,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className='text-center bg-neutral-600 bg-opacity-35 text-neutral-400 py-3'>
+<footer className='hidden lg:block text-center bg-neutral-600 bg-opacity-35 text-neutral-400 py-3'>
         <div className='flex items-center justify-center gap-4'>
           <Link to='/'>About</Link>
           <Link to='/'>Contact</Link>
