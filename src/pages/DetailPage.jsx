@@ -44,10 +44,6 @@ const DetailPage = () => {
     setPlayVideo(true)
   }
 
-  
-
- console.log
- (castData);
   return (
     <div className="w-full">
       {/* Backdrop */}
