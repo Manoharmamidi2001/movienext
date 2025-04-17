@@ -36,7 +36,7 @@ const App = () => {
   return (
     <main>
       <Header/>
-        <div className="flex-1 min-h-[100vh]">
+        <div className="flex-1 min-h-[100vh] pb-20">
         <Outlet/>
         </div>
       <Footer/>
