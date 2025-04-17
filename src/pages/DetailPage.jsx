@@ -55,7 +55,7 @@ const DetailPage = () => {
         <img
           src={`${imageURL}/${data.backdrop_path}`}
           alt={data.title || data.name}
-          className="h-full w-full object-cover opacity-30"
+          className="h-full w-full object-cover"
         />
         <div className="absolute w-full h-full top-0 bg-gradient-to-t from-neutral-900 to-transparent"></div>
       </div>
@@ -112,24 +112,28 @@ const DetailPage = () => {
             )}
             <Divider/>
             {/* Director */}
-            <p>Director: <span className='font-bold'>{castData?.crew[1]?.name}</span></p>
+            <p>Director: <span className='font-bold'>{castData?.crew?.[1]?.name || "Unknown"}</span></p>
             <Divider />
-            <p>Writer: <span className='font-bold'>{castData?.crew[4]?.name}</span></p>
+            <p>Writer: <span className='font-bold'>{castData?.crew?.[4]?.name || "Unknown"}</span></p>
             <Divider/>
-            <p>Writer: <span className='font-bold'>{castData?.crew[2]?.name}</span></p>
+            <p>Writer: <span className='font-bold'>{castData?.crew?.[2]?.name || "Unknown"}</span></p>
             <Divider />
             <p className="text-lg font-semibold mb-2">Cast:</p>
             <div className="flex flex-wrap gap-4">
-              {castData.cast.slice(0, 10).map((cast, index) => (
-                <div key={index} className="flex flex-col items-center w-24 text-center">
-                  <img
-                    src={cast.profile_path ? `${imageURL}/${cast.profile_path}` : `${avatar}`}
-                    alt={cast.name}
-                    className="rounded-full w-20 h-20 object-cover mb-1"
-                  />
-                  <p className="text-sm text-white font-bold">{cast.name}</p>
-                </div>
-              ))}
+              {castData?.cast?.length > 0 ? (
+                castData.cast.slice(0, 10).map((cast, index) => (
+                  <div key={index} className="flex flex-col items-center w-24 text-center">
+                    <img
+                      src={cast.profile_path ? `${imageURL}/${cast.profile_path}` : `${avatar}`}
+                      alt={cast.name}
+                      className="rounded-full w-20 h-20 object-cover mb-1"
+                    />
+                    <p className="text-sm text-white font-bold">{cast.name}</p>
+                  </div>
+                ))
+              ) : (
+              <p className="text-center text-red-500">Failed to load cast data.</p>
+              )}
             </div>
           </div>
         </div>
