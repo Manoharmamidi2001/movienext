@@ -5,7 +5,7 @@ const UseFetch = (endpoint) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(false)
 
-  const UseFetch = async () => {
+  const fetchData = async () => {
     try {
       setLoading(true)
       const response = await axios.get(endpoint)
@@ -26,8 +26,10 @@ const UseFetch = (endpoint) => {
   }
 
   useEffect(() => {
-    UseFetch()
-    // Add endpoint to dependency array
+    const timer = setTimeout(() => {
+      fetchData()
+    }, 100); // 100ms delay
+    return () => clearTimeout(timer);
   }, [endpoint])
 
   return { data, loading }
