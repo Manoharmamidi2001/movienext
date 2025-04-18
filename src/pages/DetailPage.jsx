@@ -112,7 +112,7 @@ const DetailPage = () => {
             <Divider />
             <p>Writer: <span className='font-bold'>{castData?.crew?.[4]?.name || "Unknown"}</span></p>
             <Divider/>
-            <p>Writer: <span className='font-bold'>{castData?.crew?.[2]?.name || "Unknown"}</span></p>
+            <p>Producer: <span className='font-bold'>{castData?.crew?.[2]?.name || "Unknown"}</span></p>
             <Divider />
             <p className="text-lg font-semibold mb-2">Cast:</p>
             <div className="flex flex-wrap gap-4">
