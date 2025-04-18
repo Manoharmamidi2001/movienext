@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa'
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 const BannerHome = () => {
     const bannerData = useSelector(state=> state.movieData.bannerData)
-    const imageURL = useSelector(state => state.movieData.baseURL)  
+    const imageURL = useSelector(state => state.movieData.baseURL)
     const [image, setImage] = useState(0)
 
     const handleNext = () => {
@@ -56,7 +57,13 @@ const BannerHome = () => {
                                     <span>|</span>
                                     <p>Views: {`${Number(item.popularity).toFixed(0)}`}</p>
                                 </div>
-                                
+                                <Link to={`${item.media_type}/${item.id}`}>
+                                <button className="group mt-3 w-[150px] py-4 text-center bg-gradient-to-r from-red-600 via-orange-700 to-red-500 rounded-md text-xl text-white font-semibold transition-all duration-300 ease-in-out transform hover:scale-105 hover:brightness-110 hover:shadow-lg overflow-hidden relative">
+                                    <span className="relative z-10 group-hover:animate-pulse group-hover:tracking-widest transition-all duration-500 ease-in-out">
+                                        View Details
+                                    </span>
+                                </button>      
+                                </Link>                     
                             </div>
                         </div>
                     </div>
